@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+{% block main %}
+
+<main class="px-3">
+    <h1>IoT Manager</h1>
+    <p class="lead">Mange your IoT product</p>
+    <p class="lead">
+        <a href="{{ url_for('user.signup') }}" class="btn btn-lg btn-secondary fw-bold border-white bg-white">Signup</a>
+    </p>
+</main>
+
+{% endblock main %}

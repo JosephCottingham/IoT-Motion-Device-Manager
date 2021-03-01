@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+{% block main %}
+
+<main class="form-signin">
+  <form method="POST">
+    <img class="mb-4" src="{{ url_for('static', filename='img/manage.svg') }}" alt="" width="300" height="240">
+    <h1 class="h3 mb-3 fw-normal">Please login</h1>
+    {{ form.hidden_tag() }}
+    {{ form.email(placeholder="Email", class_='form-control') }}
+    {{ form.password(placeholder="Password", class_='form-control') }}
+    {{ form.submit(class_='w-100 btn btn-lg btn-primary') }}
+    <p class="mt-5 mb-3 text-muted">&copy; 2021</p>
+  </form>
+</main>
+
+{% endblock main %}
