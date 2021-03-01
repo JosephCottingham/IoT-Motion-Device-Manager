@@ -1,7 +1,8 @@
 from flask import Blueprint, request, render_template, redirect, url_for, flash, abort
 from flask_login import login_user, logout_user, current_user, login_required
 
-from IoT_Manager import db_session
+from IoT_Manager import app, db_session
+
 from IoT_Manager.sql_models import (
     User,
     Device,
@@ -13,8 +14,8 @@ from IoT_Manager.forms import LoginForm, SignUpForm, CreateDeviceForm, CreateTri
 
 Management_Blueprint = Blueprint('management', __name__)
 
-@login_required
 @Management_Blueprint.route('/panel', methods=['GET', 'POST'])
+@login_required
 def gen_panel():
     # CREATE DEVICE CREATE FORM
     form = CreateDeviceForm()
@@ -32,8 +33,8 @@ def gen_panel():
         return redirect(url_for('management.gen_panel'))
     return render_template('panel.html', form=form)
 
-@login_required
 @Management_Blueprint.route('/device/<device_id>/delete', methods=['GET'])
+@login_required
 def device_delete(device_id):
     # GET THE DEVICE REQUESTED
     device = db_session.query(Device).get(device_id)
@@ -45,8 +46,8 @@ def device_delete(device_id):
     db_session.commit()
     return redirect(url_for('management.gen_panel'))
 
-@login_required
 @Management_Blueprint.route('/panel/<device_id>', methods=['GET', 'POST'])
+@login_required
 def device_panel(device_id):
     # GET THE DEVICE REQUESTED
     device = db_session.query(Device).get(device_id)
@@ -69,8 +70,8 @@ def device_panel(device_id):
         return redirect(url_for('management.device_panel', device_id=device_id))
     return render_template('device_panel.html', form=form, device=device)
 
-@login_required
 @Management_Blueprint.route('/trigger/<trigger_id>/delete', methods=['GET'])
+@login_required
 def trigger_delete(trigger_id):
     # GET THE TRIGGER REQUESTED
     trigger = db_session.query(Trigger).get(trigger_id)

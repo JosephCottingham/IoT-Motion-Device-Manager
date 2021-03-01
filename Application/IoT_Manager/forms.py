@@ -2,7 +2,7 @@ from flask_wtf import FlaskForm
 from wtforms import StringField, PasswordField, SubmitField, TextAreaField, SelectField
 from wtforms.validators import DataRequired, Length, Email, ValidationError
 from IoT_Manager.sql_models import User, Trigger_Types
-from IoT_Manager import db_session
+from IoT_Manager import app, db_session
 
 
 class SignUpForm(FlaskForm):

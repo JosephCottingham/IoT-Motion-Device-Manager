@@ -1,7 +1,8 @@
 from flask import Blueprint, request, render_template, redirect, url_for, flash
 from flask_login import login_user, logout_user, current_user, login_required
 
-from IoT_Manager import db_session
+from IoT_Manager import app, db_session
+
 from IoT_Manager.sql_models import (
     User,
     Device,
@@ -27,7 +28,7 @@ def login():
         if user and user.check_password(form.password.data):
             # create new session
             login_user(user)
-            return redirect(url_for('manage.gen_panel'))
+            return redirect(url_for('management.gen_panel'))
         else:
             flash("Invalid login details")
 
@@ -41,7 +42,7 @@ def signup():
     form = SignUpForm()
     # CHECK IF USER IS ALL READY SIGNED IN
     if current_user.is_authenticated:
-        return redirect(url_for('manage.gen_panel'))
+        return redirect(url_for('management.gen_panel'))
 
     # check if valid creation request
     if request.method == 'POST' and form.validate_on_submit():

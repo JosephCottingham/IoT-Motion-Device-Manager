@@ -9,7 +9,10 @@ class Config:
         if Config.__instance__ is None:
             load_dotenv()
 
-            self.SQLALCHEMY_DATABASE_URI = os.environ.get('SQLALCHEMY_DATABASE_URI')
+            if os.environ.get('IS_TEST'):
+                self.SQLALCHEMY_DATABASE_URI = os.environ.get('SQLALCHEMY_DATABASE_URI_TEST')
+            else:
+                self.SQLALCHEMY_DATABASE_URI = os.environ.get('SQLALCHEMY_DATABASE_URI')
             self.SECRET_KEY = os.environ.get('SECRET_KEY')
 
             Config.__instance__ = self

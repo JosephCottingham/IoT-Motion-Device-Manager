@@ -17,3 +17,11 @@ Then you can run the following to run the Flask server:
 ```
 python3 wsgi.py
 ```
+
+## Testing
+
+```
+python -m unittest IoT_Manager.tests.tests_management
+python -m unittest IoT_Manager.tests.tests_auth
+
+```

@@ -41,6 +41,8 @@ Session = sessionmaker(bind=db_engine)
 db_session = Session()
 db_session.commit()
 
+app.config['SQLALCHEMY_SESSION'] = db_session
+
 ##################
 ###### AUTH ######
 ##################
@@ -64,7 +66,7 @@ def load_user(id):
 from .views.user import User_Blueprint
 from .views.management import Management_Blueprint
 
-app.register_blueprint(User_Blueprint, url_prefix='/user')
+app.register_blueprint(User_Blueprint, url_prefix='')
 app.register_blueprint(Management_Blueprint, url_prefix='/management')
 
 @app.route("/")

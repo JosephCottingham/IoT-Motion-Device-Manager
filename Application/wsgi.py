@@ -3,6 +3,7 @@ import os, json
 from dotenv import load_dotenv
 
 if __name__ == "__main__":
-   # START APP
+   # LOAD VARIABLES INTO ENVIROMENT
    load_dotenv()
+   # START APP
    app.run(debug=os.environ.get('DEBUG'), port=os.environ.get('PORT'))
