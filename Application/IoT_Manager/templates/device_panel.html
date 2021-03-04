@@ -1,19 +1,27 @@
 {% extends 'base.html' %}
 {% block main %}
+<style>
+    .deviceCard {
+      border: 1px solid rgba(255, 255, 255, .25);
+      border-radius: 24px !important;
+      background-color: #212529 !important;
+      padding: 24px !important;
+    }
+    
+  </style>
 
 <main>
     <div class="row">
         <div class="col-md-8">
             <div class="d-flex">
                 {% for trigger in device.triggers %}
-                <div class="p-2 flex-fill" style="background:black; color:black;">
-                    <div class="card">
-                        <div class="card-body">
-                            <h4 class="card-title">{{ trigger.name }}</h4>
-                            <p class="card-text">{{ trigger.desc }}</p>
-                            <a href="{{ url_for('management.trigger_delete', trigger_id=trigger.id) }}"
-                                class="card-link">Delete</a>
-                        </div>
+                <div class="p-2 flex-fill" style="color:white;">
+                    <div class="card deviceCard">
+                      <div class="card-body">
+                        <h4 class="card-title">{{ trigger.name }}</h4>
+                        <p class="card-text">{{ trigger.desc }}</p>
+                        <a href="{{ url_for('management.trigger_delete', trigger_id=trigger.id) }}" class="btn btn-outline-danger">Delete</a>
+                      </div>
                     </div>
                 </div>
                 {% endfor %}
@@ -34,16 +42,16 @@
         <div class="col-md-8">
             <div class="d-flex">
                 {% for trigger in device.triggers %}
-                {% for event in trigger.events %}
-                <div class="p-2 bg-info flex-fill">
-                    <div class="card">
-                        <div class="card-body">
-                            <h4 class="card-title">{{ trigger.name }}</h4>
-                            <p class="card-text">{{ trigger.desc }}</p>
+                    {% for event in trigger.events %}
+                        <div class="p-2 bg-info flex-fill">
+                            <div class="card">
+                                <div class="card-body">
+                                    <h4 class="card-title">{{ trigger.name }}</h4>
+                                    <p class="card-text">{{ trigger.desc }}</p>
+                                </div>
+                            </div>
                         </div>
-                    </div>
-                </div>
-                {% endfor %}
+                    {% endfor %}
                 {% endfor %}
             </div>
         </div>

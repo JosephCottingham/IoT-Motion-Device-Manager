@@ -7,8 +7,18 @@
     <h1 class="h3 mb-3 fw-normal">Please signup</h1>
 
     {{form.hidden_tag()}}
-    {{ form.email(placeholder="Email", class_='form-control') }}
-    {{ form.password(placeholder="Password", class_='form-control') }}
+    <div class="mb-5">
+      <div class="form-group" style="text-align: left;">
+        {{ form.email.label }}
+        {{ form.email(placeholder="Email", class_='form-control') }}
+      </div>
+    </div>
+    <div class="mb-5">
+      <div class="form-group" style="text-align: left;">
+        {{ form.password.label }}
+        {{ form.password(placeholder="Password", class_='form-control') }}
+      </div>
+    </div>
     {{ form.submit(class_='w-100 btn btn-lg btn-primary') }}
     <p class="mt-5 mb-3 text-muted">&copy; 2021</p>
   </form>

@@ -23,5 +23,4 @@ python3 wsgi.py
 ```
 python -m unittest IoT_Manager.tests.tests_management
 python -m unittest IoT_Manager.tests.tests_auth
-
 ```

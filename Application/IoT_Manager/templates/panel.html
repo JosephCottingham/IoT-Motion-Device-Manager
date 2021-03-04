@@ -1,18 +1,28 @@
 {% extends 'base.html' %}
 {% block main %}
 
+<style>
+  .deviceCard {
+    border: 1px solid rgba(255, 255, 255, .25);
+    border-radius: 24px !important;
+    background-color: #212529 !important;
+    padding: 24px !important;
+  }
+  
+</style>
+
 <main>
   <div class="row">
     <div class="col-md-8">
       <div class="d-flex">
         {% for device in current_user.devices %}
-        <div class="p-2 flex-fill" style="background:black; color:black;">
-          <div class="card">
+        <div class="p-2 flex-fill" style="color:white;">
+          <div class="card deviceCard">
             <div class="card-body">
               <h4 class="card-title">{{ device.name }}</h4>
               <p class="card-text">{{ device.desc }}</p>
-              <a href="{{ url_for('management.device_delete', device_id=device.id) }}" class="card-link">Delete</a>
-              <a href="{{ url_for('management.device_panel', device_id=device.id) }}" class="card-link">Details</a>
+              <a href="{{ url_for('management.device_delete', device_id=device.id) }}" class="btn btn-outline-danger">Delete</a>
+              <a href="{{ url_for('management.device_panel', device_id=device.id) }}" class="btn btn-outline-warning">Details</a>
             </div>
           </div>
         </div>
@@ -23,8 +33,11 @@
       <form action="" method="post">
         <h1 class="h3 mb-3 fw-normal">Create Device</h1>
         {{ form.hidden_tag() }}
+        {{ form.device_code.label }}
         {{ form.device_code(placeholder="Device Code", class_='form-control') }}
+        {{ form.name.label }}
         {{ form.name(placeholder="Name", class_='form-control') }}
+        {{ form.desc.label }}
         {{ form.desc(placeholder="Description", class_='form-control') }}
         {{ form.create(class_='w-100 btn btn-lg btn-primary') }}
       </form>
