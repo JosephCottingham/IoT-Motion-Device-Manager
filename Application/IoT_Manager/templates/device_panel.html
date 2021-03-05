@@ -7,25 +7,44 @@
       background-color: #212529 !important;
       padding: 24px !important;
     }
-    
+
+    .list-group-item {
+        background-color: #212529
+    }
   </style>
 
 <main>
     <div class="row">
-        <div class="col-md-8">
-            <div class="d-flex">
+        <div class="col-md-4">
+            <ul>
                 {% for trigger in device.triggers %}
-                <div class="p-2 flex-fill" style="color:white;">
+                <li class="p-2 flex-fill list-group-item">
                     <div class="card deviceCard">
-                      <div class="card-body">
-                        <h4 class="card-title">{{ trigger.name }}</h4>
-                        <p class="card-text">{{ trigger.desc }}</p>
-                        <a href="{{ url_for('management.trigger_delete', trigger_id=trigger.id) }}" class="btn btn-outline-danger">Delete</a>
-                      </div>
+                        <div class="card-body">
+                            <h4 class="card-title">{{ trigger.name }}</h4>
+                            <p class="card-text">{{ trigger.desc }}</p>
+                            <a href="{{ url_for('management.trigger_delete', trigger_id=trigger.id) }}" class="btn btn-outline-danger">Delete</a>
+                        </div>
                     </div>
-                </div>
+                </li>
                 {% endfor %}
-            </div>
+            </ul>
+        </div>
+        <div class="col-md-4">
+            <ul>
+                {% for trigger in device.triggers %}
+                    {% for event in trigger.events %}
+                        <li class="p-2 flex-fill list-group-item">
+                            <div class="card">
+                                <div class="card-body">
+                                    <h4 class="card-title">{{ trigger.name }}</h4>
+                                    <p class="card-text">{{ trigger.desc }}</p>
+                                </div>
+                            </div>
+                        </li>
+                    {% endfor %}
+                {% endfor %}
+            </ul>
         </div>
         <div class="col-md-4">
             <form action="" method="post">
@@ -36,24 +55,6 @@
                 {{ form.desc(placeholder="Description", class_='form-control') }}
                 {{ form.create(class_='w-100 btn btn-lg btn-primary') }}
             </form>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-md-8">
-            <div class="d-flex">
-                {% for trigger in device.triggers %}
-                    {% for event in trigger.events %}
-                        <div class="p-2 bg-info flex-fill">
-                            <div class="card">
-                                <div class="card-body">
-                                    <h4 class="card-title">{{ trigger.name }}</h4>
-                                    <p class="card-text">{{ trigger.desc }}</p>
-                                </div>
-                            </div>
-                        </div>
-                    {% endfor %}
-                {% endfor %}
-            </div>
         </div>
     </div>
 </main>
